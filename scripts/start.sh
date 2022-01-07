@@ -87,6 +87,8 @@ if [ ! -d "/etc/letsencrypt/live/${LETSENCRYPT_DOMAIN#\*\.}" ] || \
   exit 1
 fi
 
+# info about -passout flag
+# https://superuser.com/a/724987/691121
 openssl pkcs12 -export \
   -out /etc/letsencrypt/live/${LETSENCRYPT_DOMAIN#\*\.}/certificate.pkcs12 \
   -inkey /etc/letsencrypt/live/${LETSENCRYPT_DOMAIN#\*\.}/privkey.pem \
