@@ -87,6 +87,13 @@ if [ ! -d "/etc/letsencrypt/live/${LETSENCRYPT_DOMAIN#\*\.}" ] || \
   exit 1
 fi
 
+openssl pkcs12 -export \
+  -out /etc/letsencrypt/live/${LETSENCRYPT_DOMAIN#\*\.}/certificate.pkcs12 \
+  -inkey /etc/letsencrypt/live/${LETSENCRYPT_DOMAIN#\*\.}/privkey.pem \
+  -in /etc/letsencrypt/live/${LETSENCRYPT_DOMAIN#\*\.}/cert.pem \
+  -certfile /etc/letsencrypt/live/${LETSENCRYPT_DOMAIN#\*\.}/chain.pem \
+  -passout pass:
+
 # Check if certificates require renewal twice a day
 while :; do
   # Wait for a random period within the next 12 hours
